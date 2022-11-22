@@ -5,20 +5,22 @@
 <p id="demo"></p>
 
 <script>
-var x = document.getElementById("demo");
+var successHandler = function(position) { 
+alert(position.coords.latitude); 
+alert(position.coords.longitude); 
+}; 
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+var errorHandler = function (errorObj) { 
+alert(errorObj.code + ": " + errorObj.message); 
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
+alert("something wrong take this lat " + 26.0546106 ); 
+alert("something wrong take this lng " +-98.3939791); 
+
+}; 
+
+navigator.geolocation.getCurrentPosition( 
+successHandler, errorHandler, 
+{enableHighAccuracy: true, maximumAge: 10000});
 </script>
 
 </body>
