@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+  </head>
 <body onload="getLocation()">
 
 <p id="demo"></p>
 
 <script>
-var successHandler = function(position) { 
-alert(position.coords.latitude); 
-alert(position.coords.longitude); 
-}; 
+if (navigator.geolocation) {        // test whether device supports geolocation!
+      navigator.geolocation.watchPosition (gotLocation, errLocation, {maximumAge: 30000});
+}
 
-var errorHandler = function (errorObj) { 
-alert(errorObj.code + ": " + errorObj.message); 
+function gotLocation (position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      var accuracy = position.coords.accuracy;
+      var timestamp = position.timestamp;
+}
 
-alert("something wrong take this lat " + 26.0546106 ); 
-alert("something wrong take this lng " +-98.3939791); 
-
-}; 
-
-navigator.geolocation.getCurrentPosition( 
-successHandler, errorHandler, 
-{enableHighAccuracy: true, maximumAge: 10000});
+function errLocation (error) {
+      var errCode = error.code;
+      var errMess = error.message;
+}
 </script>
 
 </body>
